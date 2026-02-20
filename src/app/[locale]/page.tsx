@@ -2,6 +2,9 @@ import { T } from "gt-next";
 import { getGT } from "gt-next/server";
 import { LocaleSelector } from "gt-next";
 import { Num, DateTime } from "gt-next";
+import Link from "next/link";
+import { movieData } from "@/data/movies";
+import GenreFilter from "./GenreFilter";
 
 function StarIcon() {
   return (
@@ -17,71 +20,92 @@ function StarIcon() {
   );
 }
 
-export default async function Home() {
-  const gt = await getGT();
+function ChevronRight() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="text-neutral-600 group-hover:text-neutral-400 transition-colors"
+    >
+      <path d="M9 18l6-6-6-6" />
+    </svg>
+  );
+}
 
-  const movies = [
-    {
-      title: gt("The Last Horizon"),
-      genre: gt("Science Fiction"),
-      releaseDate: "2025-11-15",
-      rating: 8.4,
-      reviewCount: 12847,
-      synopsis: gt(
-        "A lone astronaut discovers an ancient signal at the edge of the solar system, leading humanity to question everything it knows about its origins."
-      ),
-    },
-    {
-      title: gt("Midnight in Montmartre"),
-      genre: gt("Romance"),
-      releaseDate: "2025-08-22",
-      rating: 7.2,
-      reviewCount: 8321,
-      synopsis: gt(
-        "Two strangers meet at a Parisian cafe and spend one transformative night wandering the city, sharing secrets they have never told anyone."
-      ),
-    },
-    {
-      title: gt("Iron Verdict"),
-      genre: gt("Thriller"),
-      releaseDate: "2026-01-10",
-      rating: 8.9,
-      reviewCount: 21503,
-      synopsis: gt(
-        "A defense attorney uncovers a vast conspiracy when her seemingly routine case reveals connections to the highest levels of government."
-      ),
-    },
-    {
-      title: gt("The Cartographer's Daughter"),
-      genre: gt("Drama"),
-      releaseDate: "2025-05-03",
-      rating: 7.8,
-      reviewCount: 6214,
-      synopsis: gt(
-        "Set in 1920s Istanbul, a young woman inherits her father's map shop and discovers hidden messages that reveal a forgotten chapter of her family's history."
-      ),
-    },
-    {
-      title: gt("Echoes of the Deep"),
-      genre: gt("Horror"),
-      releaseDate: "2025-10-31",
-      rating: 7.5,
-      reviewCount: 9876,
-      synopsis: gt(
-        "A marine research team encounters something ancient and malevolent in an unexplored trench, where the pressure is not the only thing trying to crush them."
-      ),
-    },
-    {
-      title: gt("Boundless"),
-      genre: gt("Animation"),
-      releaseDate: "2025-12-20",
-      rating: 8.7,
-      reviewCount: 15432,
-      synopsis: gt(
-        "A child with the ability to bring drawings to life must navigate a world where imagination is both a gift and a dangerous power."
-      ),
-    },
-  ];
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ genre?: string }>;
+}) {
+  const gt = await getGT();
+  const { genre: genreFilter } = await searchParams;
+
+  const genreMap: Record<string, string> = {
+    "Science Fiction": gt("Science Fiction"),
+    Romance: gt("Romance"),
+    Thriller: gt("Thriller"),
+    Drama: gt("Drama"),
+    Horror: gt("Horror"),
+    Animation: gt("Animation"),
+  };
+
+  const movies = movieData.map((m) => {
+    const genreKeys: Record<string, string> = {
+      "the-last-horizon": "Science Fiction",
+      "midnight-in-montmartre": "Romance",
+      "iron-verdict": "Thriller",
+      "the-cartographers-daughter": "Drama",
+      "echoes-of-the-deep": "Horror",
+      boundless: "Animation",
+    };
+    const genreKey = genreKeys[m.slug] || "Drama";
+    return { ...m, genreKey, genre: genreMap[genreKey] };
+  });
+
+  const titleMap: Record<string, string> = {
+    "the-last-horizon": gt("The Last Horizon"),
+    "midnight-in-montmartre": gt("Midnight in Montmartre"),
+    "iron-verdict": gt("Iron Verdict"),
+    "the-cartographers-daughter": gt("The Cartographer's Daughter"),
+    "echoes-of-the-deep": gt("Echoes of the Deep"),
+    boundless: gt("Boundless"),
+  };
+
+  const synopsisMap: Record<string, string> = {
+    "the-last-horizon": gt(
+      "A lone astronaut discovers an ancient signal at the edge of the solar system, leading humanity to question everything it knows about its origins."
+    ),
+    "midnight-in-montmartre": gt(
+      "Two strangers meet at a Parisian cafe and spend one transformative night wandering the city, sharing secrets they have never told anyone."
+    ),
+    "iron-verdict": gt(
+      "A defense attorney uncovers a vast conspiracy when her seemingly routine case reveals connections to the highest levels of government."
+    ),
+    "the-cartographers-daughter": gt(
+      "Set in 1920s Istanbul, a young woman inherits her father's map shop and discovers hidden messages that reveal a forgotten chapter of her family's history."
+    ),
+    "echoes-of-the-deep": gt(
+      "A marine research team encounters something ancient and malevolent in an unexplored trench, where the pressure is not the only thing trying to crush them."
+    ),
+    boundless: gt(
+      "A child with the ability to bring drawings to life must navigate a world where imagination is both a gift and a dangerous power."
+    ),
+  };
+
+  const filteredMovies = genreFilter
+    ? movies.filter((m) => m.genreKey === genreFilter)
+    : movies;
+
+  const translatedGenres = Object.entries(genreMap).map(([key, label]) => ({
+    key,
+    label,
+  }));
 
   return (
     <div className="min-h-screen bg-neutral-950 font-sans text-neutral-200">
@@ -137,48 +161,60 @@ export default async function Home() {
           </T>
         </div>
 
+        <GenreFilter
+          genres={translatedGenres}
+          activeGenre={genreFilter || null}
+          allLabel={gt("All")}
+        />
+
         <div className="space-y-4">
-          {movies.map((movie, i) => (
-            <article
-              key={i}
-              className="rounded-lg border border-neutral-800 bg-neutral-900/50 p-5 hover:border-neutral-700 transition-colors"
+          {filteredMovies.map((movie) => (
+            <Link
+              key={movie.slug}
+              href={`/movie/${movie.slug}`}
+              className="group block"
             >
-              <div className="flex items-start justify-between gap-4 mb-3">
-                <div className="min-w-0">
-                  <h3 className="text-lg font-semibold text-neutral-100 mb-1.5">
-                    {movie.title}
-                  </h3>
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <span className="inline-block rounded-full bg-neutral-800 px-3 py-0.5 text-xs font-medium text-neutral-300">
-                      {movie.genre}
-                    </span>
+              <article className="rounded-lg border border-neutral-800 bg-neutral-900/50 p-5 hover:border-neutral-700 transition-colors">
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-lg font-semibold text-neutral-100 mb-1.5">
+                        {titleMap[movie.slug]}
+                      </h3>
+                      <ChevronRight />
+                    </div>
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <span className="inline-block rounded-full bg-neutral-800 px-3 py-0.5 text-xs font-medium text-neutral-300">
+                        {movie.genre}
+                      </span>
+                      <T>
+                        <span className="text-xs text-neutral-500">
+                          Released{" "}
+                          <DateTime>{new Date(movie.releaseDate)}</DateTime>
+                        </span>
+                      </T>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end shrink-0">
+                    <div className="flex items-center gap-1.5">
+                      <StarIcon />
+                      <span className="text-lg font-semibold text-neutral-100">
+                        <Num>{movie.rating}</Num>
+                      </span>
+                      <span className="text-sm text-neutral-500">/10</span>
+                    </div>
                     <T>
-                      <span className="text-xs text-neutral-500">
-                        Released{" "}
-                        <DateTime>{new Date(movie.releaseDate)}</DateTime>
+                      <span className="text-xs text-neutral-500 mt-0.5">
+                        <Num>{movie.reviewCount}</Num> reviews
                       </span>
                     </T>
                   </div>
                 </div>
-                <div className="flex flex-col items-end shrink-0">
-                  <div className="flex items-center gap-1.5">
-                    <StarIcon />
-                    <span className="text-lg font-semibold text-neutral-100">
-                      <Num>{movie.rating}</Num>
-                    </span>
-                    <span className="text-sm text-neutral-500">/10</span>
-                  </div>
-                  <T>
-                    <span className="text-xs text-neutral-500 mt-0.5">
-                      <Num>{movie.reviewCount}</Num> reviews
-                    </span>
-                  </T>
-                </div>
-              </div>
-              <p className="text-sm text-neutral-400 leading-relaxed">
-                {movie.synopsis}
-              </p>
-            </article>
+                <p className="text-sm text-neutral-400 leading-relaxed">
+                  {synopsisMap[movie.slug]}
+                </p>
+              </article>
+            </Link>
           ))}
         </div>
       </main>
