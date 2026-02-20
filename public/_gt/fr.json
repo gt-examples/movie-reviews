@@ -1,0 +1,53 @@
+{
+  "055cfd3265b4dffb": "Un agrégateur de critiques de films qui met en avant les capacités d’internationalisation de General Translation.",
+  "14a683006c4c651e": "Critiques de films",
+  "1faf1112e8402bff": "The Last Horizon",
+  "2534b92469226b3b": "Horreur",
+  "32e1ac2bd0e0526e": "Les échos des profondeurs",
+  "4812e92845fef2bf": "Une avocate de la défense découvre un vaste complot lorsque ce qui semblait être une affaire routinière révèle des liens avec les plus hautes sphères du gouvernement.",
+  "48ffcecbf8ae7419": "Un enfant, capable de donner vie à ses dessins, doit naviguer dans un monde où l’imagination est à la fois un don et un pouvoir dangereux.",
+  "4a0bec44d9b69b76": "Sans limites",
+  "62e2434acd574fb7": "Critiques de films | General Translation",
+  "6e62efb13b4c6240": {
+    "c": [
+      {
+        "i": 2,
+        "k": "_gt_n_2",
+        "v": "n"
+      },
+      " avis"
+    ],
+    "i": 1,
+    "t": "span"
+  },
+  "74cee914c80c4fa4": {
+    "c": "Notes, critiques et dates de sortie des derniers films. Il s'agit d'un exemple d'application développée avec General Translation pour illustrer l'internationalisation.",
+    "i": 1,
+    "t": "p"
+  },
+  "7c3efa6cb2e6feff": "Science-fiction",
+  "95b608b18e7688ab": "La fille du cartographe",
+  "afc3820702c79620": "Une équipe de recherche marine rencontre une présence ancienne et malveillante dans une fosse inexplorée, où la pression n’est pas la seule chose qui cherche à les écraser.",
+  "bbcfb9dbdbd1c5ac": "Dans l’Istanbul des années 1920, une jeune femme hérite de la boutique de cartes de son père et découvre des messages cachés qui révèlent un chapitre oublié de l’histoire de sa famille.",
+  "be11f521754bc605": "Films les mieux notés",
+  "c582e59cf92a2341": "Romance",
+  "cfa9fda4d0795518": "Thriller",
+  "d4eb43453d3cc1bf": {
+    "c": [
+      "Publié le ",
+      {
+        "i": 2,
+        "k": "_gt_date_2",
+        "v": "d"
+      }
+    ],
+    "i": 1,
+    "t": "span"
+  },
+  "d95dd73033990d82": "Drame",
+  "dd13be2c72b59450": "Un astronaute isolé découvre un signal ancien aux confins du système solaire, amenant l’humanité à remettre en question tout ce qu’elle croit savoir de ses origines.",
+  "dd7d12fea64af61c": "Iron Verdict",
+  "de711d8fc5a87520": "Animation",
+  "f93c778e2d682835": "Deux inconnus se rencontrent dans un café parisien et passent une nuit décisive à parcourir la ville, se confiant des secrets qu’ils n’ont jamais révélés à personne.",
+  "fcd883ea303bdecd": "Midnight in Montmartre"
+}

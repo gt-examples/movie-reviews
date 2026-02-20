@@ -1,0 +1,53 @@
+{
+  "055cfd3265b4dffb": "Un agregador de reseñas de películas que muestra la internacionalización con General Translation.",
+  "14a683006c4c651e": "Reseñas de películas",
+  "1faf1112e8402bff": "The Last Horizon",
+  "2534b92469226b3b": "Terror",
+  "32e1ac2bd0e0526e": "Ecos de las profundidades",
+  "4812e92845fef2bf": "Una abogada defensora descubre una vasta conspiración cuando su caso, aparentemente rutinario, revela conexiones con los niveles más altos del gobierno.",
+  "48ffcecbf8ae7419": "Un niño con la capacidad de dar vida a sus dibujos debe desenvolverse en un mundo donde la imaginación es a la vez un don y un poder peligroso.",
+  "4a0bec44d9b69b76": "Sin límites",
+  "62e2434acd574fb7": "Reseñas de películas | General Translation",
+  "6e62efb13b4c6240": {
+    "c": [
+      {
+        "i": 2,
+        "k": "_gt_n_2",
+        "v": "n"
+      },
+      " reseñas"
+    ],
+    "i": 1,
+    "t": "span"
+  },
+  "74cee914c80c4fa4": {
+    "c": "Calificaciones, reseñas y fechas de estreno de las últimas películas. Esta es una aplicación de ejemplo creada con General Translation para demostrar la internacionalización.",
+    "i": 1,
+    "t": "p"
+  },
+  "7c3efa6cb2e6feff": "Ciencia ficción",
+  "95b608b18e7688ab": "La hija del cartógrafo",
+  "afc3820702c79620": "Un equipo de investigación marina se topa con algo antiguo y malévolo en una fosa inexplorada, donde la presión no es lo único que intenta aplastarlos.",
+  "bbcfb9dbdbd1c5ac": "Ambientada en la Estambul de la década de 1920, una joven hereda la tienda de mapas de su padre y descubre mensajes ocultos que revelan un capítulo olvidado de la historia de su familia.",
+  "be11f521754bc605": "Películas mejor valoradas",
+  "c582e59cf92a2341": "Romance",
+  "cfa9fda4d0795518": "Suspenso",
+  "d4eb43453d3cc1bf": {
+    "c": [
+      "Publicado ",
+      {
+        "i": 2,
+        "k": "_gt_date_2",
+        "v": "d"
+      }
+    ],
+    "i": 1,
+    "t": "span"
+  },
+  "d95dd73033990d82": "Drama",
+  "dd13be2c72b59450": "Un astronauta solitario descubre una señal antigua en los confines del sistema solar, lo que lleva a la humanidad a cuestionar todo lo que creía saber sobre sus orígenes.",
+  "dd7d12fea64af61c": "Iron Verdict",
+  "de711d8fc5a87520": "Animación",
+  "f93c778e2d682835": "Dos desconocidos se conocen en un café parisino y pasan una noche que les cambia la vida recorriendo la ciudad y compartiendo secretos que nunca le han contado a nadie.",
+  "fcd883ea303bdecd": "Midnight in Montmartre"
+}
